@@ -20,11 +20,9 @@ export default function UserDisplay({ user }: { user: User }) {
         </Typography>
         <Box component={"div"} className="flex items-center mt-4 gap-1">
           <Image src="/icons/email_icon.svg" alt="Email Icon" width={16} height={16} />
-          <Link href={`mailto:${user.profile.email}`}>
-            <Typography variant="caption" sx={{ color: "text.secondary" }}>
-              {user.profile.email}
-            </Typography>
-          </Link>
+          <Typography variant="caption" sx={{ color: "text.secondary" }}>
+            <Link href={`mailto:${user.profile.email}`}>{user.profile.email}</Link>
+          </Typography>
         </Box>
       </Box>
     </Box>

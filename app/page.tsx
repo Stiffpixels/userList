@@ -1,5 +1,6 @@
 import UserList from "./UserList";
 import { Box, Divider, Typography } from "@mui/material";
+import Loading from "./loading";
 
 export default async function Home() {
   const response = await fetch("https://602e7c2c4410730017c50b9d.mockapi.io/users", {
@@ -8,21 +9,28 @@ export default async function Home() {
       "Content-Type": "application/json",
     },
   });
+
+  let user = [];
   if (response.ok) {
-    const user = await response.json();
-    return <UserList user={user} />;
+    user = await response.json();
   }
   return (
-    <Box component={"section"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw", height: "100vh", marginInline: "auto", pt: "1rem" }}>
-      <Box component={"div"} sx={{ display: "flex", alignItems: "center", border: "1px solid", borderRadius: 2, p: "1rem", borderColor: "divider", gap: "10px" }}>
-        <Typography variant="h4" gutterBottom sx={{ m: "0" }}>
-          No User Found
-        </Typography>
-        <Divider variant="middle" orientation="vertical" flexItem component="div" />
-        <Typography variant="h4" gutterBottom sx={{ m: "0" }}>
-          404
-        </Typography>
-      </Box>
-    </Box>
+    <>
+      {user.length === 0 ? (
+        <Box component={"section"} sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw", height: "100vh", marginInline: "auto", pt: "1rem" }}>
+          <Box component={"div"} sx={{ display: "flex", alignItems: "center", border: "1px solid", borderRadius: 2, p: "1rem", borderColor: "divider", gap: "10px" }}>
+            <Typography variant="h4" gutterBottom sx={{ m: "0" }}>
+              No User Found
+            </Typography>
+            <Divider variant="middle" orientation="vertical" flexItem component="div" />
+            <Typography variant="h4" gutterBottom sx={{ m: "0" }}>
+              404
+            </Typography>
+          </Box>
+        </Box>
+      ) : (
+        <UserList user={user} />
+      )}
+    </>
   );
 }
