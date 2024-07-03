@@ -1,6 +1,5 @@
 import UserList from "./UserList";
 import { Box, Divider, Typography } from "@mui/material";
-import Loading from "./loading";
 
 export default async function Home() {
   const response = await fetch("https://602e7c2c4410730017c50b9d.mockapi.io/users", {
